@@ -1,0 +1,27 @@
+.box {
+    padding-top: 50px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 70px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-family: "impact";
+    width: 100%;
+    border-left: 6px solid black;
+    background-color: lightgrey;
+    background-attachment: fixed;
+}
+
+@media only screen and (max-width: 600px) {
+    h1 {
+        font-size: 50px;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+    .box {
+        padding-top: 50px;
+    }
+}

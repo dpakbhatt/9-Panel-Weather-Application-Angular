@@ -1,0 +1,46 @@
+<div class="panel">
+    <div *ngIf="enter && !error" class="weather">
+        <div class="sign">
+            <div  class="panel-row" *ngIf="isDay">
+                <i class="fas fa-3x fa-sun sun"></i>  
+            </div>   
+            <div  class="panel-row" *ngIf="!isDay">
+                <i class="fas fa-3x fa-moon moon"></i>  
+            </div>   
+            <div class="panel-row cloud-div" *ngIf="this.weatherData?.weather[0].main == 'Clouds'">
+                <i class="fas fa-cloud fa-3x cloud"></i>
+            </div>
+        </div>
+
+        <div class="detail">
+            <div class="panel-row"> {{this.weatherData?.weather[0].description}} </div>
+            <div class="panel-row"> {{(this.weatherData?.main.temp - 273.15).toFixed(0)}}° </div>
+            <div class="panel-row"> {{(this.weatherData?.main.temp_min -273.15).toFixed(0)}}° / {{(this.weatherData?.main.temp_max -273.15).toFixed(0)}}° </div>
+            <div class="panel-row"> Feels Like: {{(this.weatherData?.main.feels_like -273.15).toFixed(0)}}° </div>
+            <div class="panel-row"> City: {{this.weatherData?.name}} </div>
+            <div class="panel-row" style="margin-bottom:4% ;"> Humidity: {{this.weatherData?.main.humidity}}% </div>
+        </div>    
+    </div>
+
+    <div class="issue" *ngIf="enter && error">
+        <div class="panel-row" style="font-size: 30px; padding-top: 25%;" *ngIf="error"> {{error}}  </div>
+        <p *ngIf="error">Change city name</p>
+    </div>
+    
+    <div class="input">
+        <form *ngIf = "isCollapsed" [formGroup]="weatherSearchForm" (ngSubmit)="refresh(weatherSearchForm.value)">
+            <div class="form-group" *ngIf = "!enter">
+                <label for="city">Enter your city name....<br><br>
+                    <input required class="form-control" type="text" id="weatherLocation" aria-describedby="weatherLocation" formControlName="location"/>
+                </label>
+            </div>
+            <button type="submit" class="btn" (click)="form();">{{ enter? "Edit" : "Enter" }}</button>
+        </form>
+    </div>
+    
+    <div class="present">
+        <h5 *ngIf = "!isCollapsed">Welcome....</h5>
+        <p *ngIf = "!isCollapsed">To know weather condition of your city click the button.</p>
+        <button class="btn" (click)="this.isCollapsed = !this.isCollapsed;" *ngIf = "!isCollapsed">Click me</button>
+    </div>
+</div>
